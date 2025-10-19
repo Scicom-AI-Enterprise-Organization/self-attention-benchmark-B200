@@ -4,9 +4,9 @@ Benchmark causal self-attention in Bfloat16 forward-backward using B200.
 
 MFU reported is super low < 20% on B200 from [Scicom-AI-Enterprise-Organization/small-malaysian-lm-B200](https://github.com/Scicom-AI-Enterprise-Organization/small-malaysian-lm-B200) for full parameter Qwen3 1.7B finetuning 4k proper multipacking, I think we need to fine better attention backend before run the entire experiments, so we are going to benchmark on various cases,
 
-1. Single document (full length), eg, [1024], [2048]
-2. Consistent multi-doc splits, eg, [256, 256, 256, 256] for maxlen 1024
-3. Randomized varlen variable, but sum = total length (eg, [300, 200, 500, 24]), keeping total tokens consistent
+1. Single document (full length), [1024, 2048, 4096, 8192, 12288]
+2. Consistent multi-doc splits, [1024, 2048, 4096, 8192, 12288], each with split [4, 5, 6, 7, 8, 9]
+3. Randomized varlen variable, but sum = total length, [1024, 2048, 4096, 8192, 12288], each with split [4, 5, 6, 7, 8, 9]
 
 ## How to
 
