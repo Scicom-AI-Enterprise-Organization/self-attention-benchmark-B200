@@ -1,0 +1,62 @@
+Device: NVIDIA B200
+Single Document,
+[0, 1024] | total_len=1024  | splits=1   | max_len=1024 | time(fwd+bwd)=0.346 ms
+[0, 2048] | total_len=2048  | splits=1   | max_len=2048 | time(fwd+bwd)=0.672 ms
+[0, 4096] | total_len=4096  | splits=1   | max_len=4096 | time(fwd+bwd)=1.843 ms
+[0, 8192] | total_len=8192  | splits=1   | max_len=8192 | time(fwd+bwd)=6.031 ms
+[0, 12288] | total_len=12288 | splits=1   | max_len=12288 | time(fwd+bwd)=12.754 ms
+
+Consistent multi-doc splits 4,
+[0, 256, 512, 768, 1024] | total_len=1024  | splits=4   | max_len=256  | time(fwd+bwd)=0.400 ms
+[0, 512, 1024, 1536, 2048] | total_len=2048  | splits=4   | max_len=512  | time(fwd+bwd)=0.424 ms
+[0, 1024, 2048, 3072, 4096] | total_len=4096  | splits=4   | max_len=1024 | time(fwd+bwd)=0.722 ms
+[0, 2048, 4096, 6144, 8192] | total_len=8192  | splits=4   | max_len=2048 | time(fwd+bwd)=1.959 ms
+[0, 3072, 6144, 9216, 12288] | total_len=12288 | splits=4   | max_len=3072 | time(fwd+bwd)=3.837 ms
+Consistent multi-doc splits 5,
+Consistent multi-doc splits 6,
+[0, 2048, 4096, 6144, 8192, 10240, 12288] | total_len=12288 | splits=6   | max_len=2048 | time(fwd+bwd)=2.806 ms
+Consistent multi-doc splits 7,
+Consistent multi-doc splits 8,
+[0, 128, 256, 384, 512, 640, 768, 896, 1024] | total_len=1024  | splits=8   | max_len=128  | time(fwd+bwd)=0.402 ms
+[0, 256, 512, 768, 1024, 1280, 1536, 1792, 2048] | total_len=2048  | splits=8   | max_len=256  | time(fwd+bwd)=0.394 ms
+[0, 512, 1024, 1536, 2048, 2560, 3072, 3584, 4096] | total_len=4096  | splits=8   | max_len=512  | time(fwd+bwd)=0.566 ms
+[0, 1024, 2048, 3072, 4096, 5120, 6144, 7168, 8192] | total_len=8192  | splits=8   | max_len=1024 | time(fwd+bwd)=1.262 ms
+[0, 1536, 3072, 4608, 6144, 7680, 9216, 10752, 12288] | total_len=12288 | splits=8   | max_len=1536 | time(fwd+bwd)=2.292 ms
+Consistent multi-doc splits 9,
+
+Randomize multi-doc splits 9,
+[0, 123, 236, 338, 449, 557, 680, 795, 904, 1024] | total_len=1024  | splits=9   | max_len=123  | time(fwd+bwd)=0.398 ms
+[0, 233, 461, 686, 905, 1116, 1346, 1580, 1825, 2048] | total_len=2048  | splits=9   | max_len=245  | time(fwd+bwd)=0.392 ms
+[0, 438, 899, 1362, 1814, 2255, 2730, 3157, 3639, 4096] | total_len=4096  | splits=9   | max_len=482  | time(fwd+bwd)=0.580 ms
+[0, 908, 1813, 2722, 3633, 4554, 5462, 6400, 7294, 8192] | total_len=8192  | splits=9   | max_len=938  | time(fwd+bwd)=1.271 ms
+[0, 1406, 2769, 4116, 5457, 6872, 8240, 9632, 10975, 12288] | total_len=12288 | splits=9   | max_len=1415 | time(fwd+bwd)=2.202 ms
+Randomize multi-doc splits 8,
+[0, 129, 262, 394, 523, 651, 768, 894, 1024] | total_len=1024  | splits=8   | max_len=133  | time(fwd+bwd)=0.393 ms
+[0, 259, 511, 765, 1011, 1260, 1533, 1796, 2048] | total_len=2048  | splits=8   | max_len=273  | time(fwd+bwd)=0.395 ms
+[0, 528, 1028, 1536, 2032, 2558, 3084, 3601, 4096] | total_len=4096  | splits=8   | max_len=528  | time(fwd+bwd)=0.591 ms
+[0, 1023, 2056, 3052, 4086, 5088, 6119, 7150, 8192] | total_len=8192  | splits=8   | max_len=1042 | time(fwd+bwd)=1.341 ms
+[0, 1543, 3057, 4575, 6098, 7626, 9145, 10727, 12288] | total_len=12288 | splits=8   | max_len=1582 | time(fwd+bwd)=2.366 ms
+Randomize multi-doc splits 7,
+[0, 144, 293, 425, 570, 728, 872, 1024] | total_len=1024  | splits=7   | max_len=158  | time(fwd+bwd)=0.394 ms
+[0, 297, 589, 881, 1176, 1481, 1755, 2048] | total_len=2048  | splits=7   | max_len=305  | time(fwd+bwd)=0.399 ms
+[0, 575, 1138, 1737, 2331, 2914, 3496, 4096] | total_len=4096  | splits=7   | max_len=600  | time(fwd+bwd)=0.614 ms
+[0, 1150, 2328, 3487, 4667, 5841, 7046, 8192] | total_len=8192  | splits=7   | max_len=1205 | time(fwd+bwd)=1.417 ms
+[0, 1742, 3510, 5260, 7004, 8795, 10536, 12288] | total_len=12288 | splits=7   | max_len=1791 | time(fwd+bwd)=2.585 ms
+Randomize multi-doc splits 6,
+[0, 167, 345, 510, 669, 838, 1024] | total_len=1024  | splits=6   | max_len=186  | time(fwd+bwd)=0.392 ms
+[0, 321, 674, 1030, 1368, 1719, 2048] | total_len=2048  | splits=6   | max_len=356  | time(fwd+bwd)=0.417 ms
+[0, 720, 1399, 2058, 2748, 3418, 4096] | total_len=4096  | splits=6   | max_len=720  | time(fwd+bwd)=0.635 ms
+[0, 1383, 2764, 4152, 5495, 6873, 8192] | total_len=8192  | splits=6   | max_len=1388 | time(fwd+bwd)=1.530 ms
+[0, 2042, 4033, 6133, 8164, 10256, 12288] | total_len=12288 | splits=6   | max_len=2100 | time(fwd+bwd)=2.852 ms
+Randomize multi-doc splits 5,
+[0, 197, 409, 620, 814, 1024] | total_len=1024  | splits=5   | max_len=212  | time(fwd+bwd)=0.400 ms
+[0, 407, 812, 1238, 1642, 2048] | total_len=2048  | splits=5   | max_len=426  | time(fwd+bwd)=0.421 ms
+[0, 796, 1638, 2452, 3274, 4096] | total_len=4096  | splits=5   | max_len=842  | time(fwd+bwd)=0.676 ms
+[0, 1651, 3326, 4929, 6536, 8192] | total_len=8192  | splits=5   | max_len=1675 | time(fwd+bwd)=1.735 ms
+[0, 2448, 4913, 7374, 9797, 12288] | total_len=12288 | splits=5   | max_len=2491 | time(fwd+bwd)=3.283 ms
+Randomize multi-doc splits 4,
+[0, 260, 530, 768, 1024] | total_len=1024  | splits=4   | max_len=270  | time(fwd+bwd)=0.396 ms
+[0, 530, 1040, 1522, 2048] | total_len=2048  | splits=4   | max_len=530  | time(fwd+bwd)=0.438 ms
+[0, 1047, 2062, 3096, 4096] | total_len=4096  | splits=4   | max_len=1047 | time(fwd+bwd)=0.735 ms
+[0, 2061, 4051, 6067, 8192] | total_len=8192  | splits=4   | max_len=2125 | time(fwd+bwd)=2.010 ms
+[0, 3056, 6117, 9230, 12288] | total_len=12288 | splits=4   | max_len=3113 | time(fwd+bwd)=3.841 ms
