@@ -24,6 +24,12 @@ But do not worry, we uploaded the randomize lengths in [randomize](randomize) so
 
 2. Run benchmark,
 
+Flash Attention 3,
+
+```bash
+python3 run.py --attention "fa3" > outputs/out-fa3
+```
+
 Flash Attention 2,
 
 ```bash
