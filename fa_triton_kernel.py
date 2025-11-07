@@ -1,3 +1,7 @@
+"""
+Modified from https://triton-lang.org/main/getting-started/tutorials/06-fused-attention.html
+"""
+
 import pytest
 import torch
 import os
@@ -1261,12 +1265,6 @@ def flash_attn_varlen_func(
     dropout_p=0.0,
     softmax_scale=None,
     causal=False,
-    window_size=(-1, -1),
-    softcap=0.0,
-    alibi_slopes=None,
-    deterministic=False,
-    return_attn_probs=False,
-    block_table=None,
 ):
     """Variable-length Flash Attention function.
     
@@ -1284,28 +1282,10 @@ def flash_attn_varlen_func(
         dropout_p: float - Dropout probability (not yet supported)
         softmax_scale: float - Scaling factor for QK^T. Default: 1/sqrt(headdim)
         causal: bool - Whether to apply causal masking
-        window_size: tuple - Sliding window size (not yet supported)
-        softcap: float - Softcapping for attention (not yet supported)
-        alibi_slopes: tensor - ALiBi slopes (not yet supported)
-        deterministic: bool - Deterministic backward pass (not yet supported)
-        return_attn_probs: bool - Return attention probabilities (not yet supported)
-        block_table: tensor - Block table for paged attention (not yet supported)
     
     Returns:
         out: (total_q, nheads, headdim) - Output tensor
     """
-    if dropout_p > 0.0:
-        raise NotImplementedError("Dropout not yet supported in varlen attention")
-    if window_size != (-1, -1):
-        raise NotImplementedError("Sliding window attention not yet supported")
-    if softcap > 0.0:
-        raise NotImplementedError("Softcapping not yet supported")
-    if alibi_slopes is not None:
-        raise NotImplementedError("ALiBi slopes not yet supported")
-    if return_attn_probs:
-        raise NotImplementedError("Returning attention probabilities not yet supported")
-    if block_table is not None:
-        raise NotImplementedError("Paged attention not yet supported")
     
     # Handle MQA/GQA by expanding K and V
     nheads_q = q.shape[1]
