@@ -40,9 +40,9 @@ def make_varlen_inputs(total_len=None, split_type="single", num_splits=4, dim=12
         cu_seq_lens_q = torch.tensor(cumsum, dtype=torch.int32).cuda()
         max_seqlen_q = int(np.max(query_lens))
 
-        q = torch.randn(1, total_len, nheads, dim, dtype=torch.bfloat16, requires_grad=True, device="cuda")
-        k = torch.randn(1, total_len, nheads, dim, dtype=torch.bfloat16, requires_grad=True, device="cuda")
-        v = torch.randn(1, total_len, nheads, dim, dtype=torch.bfloat16, requires_grad=True, device="cuda")
+        q = torch.randn(1, total_len, nheads, dim, dtype=torch.float16, requires_grad=True, device="cuda")
+        k = torch.randn(1, total_len, nheads, dim, dtype=torch.float16, requires_grad=True, device="cuda")
+        v = torch.randn(1, total_len, nheads, dim, dtype=torch.float16, requires_grad=True, device="cuda")
 
         return q, k, v, cu_seq_lens_q, max_seqlen_q, query_lens
     else:

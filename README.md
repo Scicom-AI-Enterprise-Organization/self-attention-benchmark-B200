@@ -41,3 +41,9 @@ Flex Attention,
 ```bash
 python3 run.py --attention "flex" > outputs/out-flex
 ```
+
+Flash Attention 2 Triton,
+
+```bash
+python3 run.py --attention "fa_triton" > outputs/out-fa-triton
+```

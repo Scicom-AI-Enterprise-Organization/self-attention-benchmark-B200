@@ -2,7 +2,6 @@
 Modified from https://triton-lang.org/main/getting-started/tutorials/06-fused-attention.html
 """
 
-import pytest
 import torch
 import os
 
@@ -1186,8 +1185,8 @@ class _attention_varlen(torch.autograd.Function):
     @staticmethod
     def backward(ctx, do):
         q, k, v, o, M, cu_seqlens_q, cu_seqlens_k = ctx.saved_tensors
-        
-        assert do.is_contiguous()
+
+        do = do.contiguous()
         assert q.stride() == k.stride() == v.stride() == o.stride() == do.stride()
         
         dq = torch.empty_like(q)

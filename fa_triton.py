@@ -5,7 +5,7 @@ import time
 def benchmark_varlen_bwd(q, k, v, cu_seq_lens_q, max_seqlen_q, query_lens, warmup=3, repeat=10):
 
     for _ in range(warmup):
-        out = flash_attn_interface.flash_attn_varlen_func(
+        out = fa_triton_kernel.flash_attn_varlen_func(
             q=q[0],
             k=k[0],
             v=v[0],
