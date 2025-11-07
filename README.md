@@ -1,4 +1,4 @@
-# self-attention-benchmark-B200
+# causal-self-attention-benchmark-B200
 
 Benchmark causal self-attention in Bfloat16 forward-backward using B200.
 

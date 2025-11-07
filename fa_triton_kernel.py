@@ -196,16 +196,11 @@ else:
 
 configs = [
     triton.Config({'BLOCK_M': BM, 'BLOCK_N': BN}, num_stages=s, num_warps=w, pre_hook=_host_descriptor_pre_hook) \
-    for BM in [64, 128]\
+    for BM in [64, 128, 256]\
     for BN in [32, 64, 128]\
     for s in NUM_STAGES_OPTIONS \
     for w in [4, 8]\
 ]
-if "PYTEST_VERSION" in os.environ:
-    # Use a single config in testing for reproducibility
-    configs = [
-        triton.Config(dict(BLOCK_M=128, BLOCK_N=64), num_stages=2, num_warps=4, pre_hook=_host_descriptor_pre_hook),
-    ]
 
 
 def keep(conf):
@@ -1243,8 +1238,8 @@ class _attention_varlen(torch.autograd.Function):
             BLOCK_M2=BLOCK_M2, BLOCK_N2=BLOCK_N2,  #
             BLK_SLICE_FACTOR=BLK_SLICE_FACTOR,  #
             HEAD_DIM=HEAD_DIM,  #
-            num_warps=4,  #
-            num_stages=1  #
+            num_warps=8,  #
+            num_stages=3  #
         )
         
         return dq, dk, dv, None, None, None, None, None, None
@@ -1302,3 +1297,54 @@ def flash_attn_varlen_func(
     
     return _attention_varlen.apply(q, k, v, cu_seqlens_q, cu_seqlens_k, 
                                    max_seqlen_q, max_seqlen_k, causal, softmax_scale)
+
+if __name__ == "__main__":
+    import flash_attn
+
+    seqlens = [128, 256, 64, 192]
+    total_tokens = sum(seqlens)
+
+    cu_seqlens_q = torch.tensor([0, 128, 384, 448, 640], dtype=torch.int32, device="cuda")
+
+    q = torch.randn(total_tokens, 8, 128, device="cuda", dtype=torch.float16, requires_grad=True)
+    k = torch.randn(total_tokens, 8, 128, device="cuda", dtype=torch.float16, requires_grad=True)
+    v = torch.randn(total_tokens, 8, 128, device="cuda", dtype=torch.float16, requires_grad=True)
+
+    q_fa2 = q.detach().clone()
+    k_fa2 = k.detach().clone()
+    v_fa2 = v.detach().clone()
+    q_fa2.requires_grad = True
+    k_fa2.requires_grad = True
+    v_fa2.requires_grad = True
+
+    dout = torch.randn(total_tokens, 8, 128, device='cuda', dtype=torch.float16)
+    dout_fa2 = dout.detach().clone()
+
+    out = flash_attn_varlen_func(
+        q, k, v,
+        cu_seqlens_q, 
+        cu_seqlens_q,
+        max_seqlen_q=256, 
+        max_seqlen_k=256,
+        causal=True
+    )
+
+    out_flash2 = flash_attn.flash_attn_varlen_func(
+        q = q_fa2,
+        k = k_fa2,
+        v = v_fa2,
+        cu_seqlens_q=cu_seqlens_q,
+        cu_seqlens_k=cu_seqlens_q,
+        max_seqlen_q=256,
+        max_seqlen_k=256,
+        causal = True
+    )
+
+    assert torch.allclose(out, out_flash2, atol=0.125, rtol=0)
+
+    out.backward(dout)
+    out_flash2.backward(dout_fa2)
+
+    assert torch.allclose(q.grad, q_fa2.grad, atol=0.125, rtol=0)
+    assert torch.allclose(k.grad, k_fa2.grad, atol=0.125, rtol=0)
+    assert torch.allclose(v.grad, v_fa2.grad, atol=0.125, rtol=0)
