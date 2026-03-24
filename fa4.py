@@ -15,7 +15,7 @@ def benchmark_varlen_bwd(q, k, v, cu_seq_lens_q, max_seqlen_q, query_lens, warmu
             max_seqlen_k=max_seqlen_q,
             causal=True
         )
-        loss = out.sum()
+        loss = out[0].sum()
         loss.backward()
         torch.cuda.synchronize()
         q.grad = k.grad = v.grad = None
@@ -33,7 +33,7 @@ def benchmark_varlen_bwd(q, k, v, cu_seq_lens_q, max_seqlen_q, query_lens, warmu
             max_seqlen_k=max_seqlen_q,
             causal=True
         )
-        loss = out.sum()
+        loss = out[0].sum()
         loss.backward()
         torch.cuda.synchronize()
         q.grad = k.grad = v.grad = None
