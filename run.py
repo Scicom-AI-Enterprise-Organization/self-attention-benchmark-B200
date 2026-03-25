@@ -10,7 +10,7 @@ def print_line(cu_seq_lens_q, query_lens, max_seqlen_q, avg_time):
     print(f"{cu_seq_lens_q} | total_len={cu_seq_lens_q[-1]:<5} | splits={len(query_lens):<3} | max_len={max_seqlen_q:<4} | time(fwd+bwd)={avg_time*1000:.3f} ms")
 
 @click.option('--attention', default='fa2', help='attention name.')
-@click.option('--lengths', default='[1024, 2048, 4096, 8192, 12288]', help='lengths.')
+@click.option('--lengths', default='[1024, 2048, 4096, 8192, 12288, 16384, 32768, 65536]', help='lengths.')
 @click.option('--splits', default='[4, 5, 6, 7, 8, 9]', help='splits.')
 @click.command()
 def main(attention, lengths, splits):
@@ -40,7 +40,7 @@ def main(attention, lengths, splits):
             print_line(cu_seq_lens_q, query_lens, max_seqlen_q, avg_time)
     print()
 
-    files = glob('randomize/*.json')
+    files = glob('randomizeV2/*.json')
     splits = defaultdict(dict)
     for f in files:
         splitted = f.split('-')
